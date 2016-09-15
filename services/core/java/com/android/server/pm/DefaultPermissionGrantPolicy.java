@@ -678,6 +678,17 @@ final class DefaultPermissionGrantPolicy {
                 grantRuntimePermissionsLPw(nfcTagPkg, PHONE_PERMISSIONS, false, userId);
             }
 
+            // Gallery
+            PackageParser.Package gallerypackage = getSystemPackageLPr(
+                    "com.android.gallery3d");
+            if (gallerypackage != null && doesPackageSupportRuntimePermissions(gallerypackage)) {
+                grantRuntimePermissionsLPw(gallerypackage, CAMERA_PERMISSIONS, userId);
+                grantRuntimePermissionsLPw(gallerypackage, CONTACTS_PERMISSIONS, userId);
+                grantRuntimePermissionsLPw(gallerypackage, LOCATION_PERMISSIONS, userId);
+                grantRuntimePermissionsLPw(gallerypackage, MICROPHONE_PERMISSIONS, userId);
+                grantRuntimePermissionsLPw(gallerypackage, STORAGE_PERMISSIONS, userId);
+            }
+
             // Storage Manager
             Intent storageManagerIntent = new Intent(StorageManager.ACTION_MANAGE_STORAGE);
             PackageParser.Package storageManagerPckg = getDefaultSystemHandlerActivityPackageLPr(
